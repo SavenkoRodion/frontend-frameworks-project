@@ -1,6 +1,6 @@
 type TPost = {
-  userId: string;
-  id: string[];
+  userId: number;
+  id: number;
   title: string;
   body: string;
 };

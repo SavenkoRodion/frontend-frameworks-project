@@ -1,19 +1,15 @@
-import { useEffect, useState } from "react";
-import TPost from "../../types/TPost";
+import TPost from "../../Model/TPost";
+import JsonApiEndpoitsEnum from "../../Model/JsonApiEndpoitsEnum";
+import useJsonApiFetch from "../../Hooks/useJsonApiFetch";
 import Post from "./Post";
 
 const Posts = () => {
-  const [posts, setPosts] = useState<TPost[]>([]);
-
-  useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/posts")
-      .then((response) => response.json())
-      .then((data: TPost[]) => setPosts(data));
-  }, []);
+  const posts = useJsonApiFetch<TPost>(JsonApiEndpoitsEnum.POSTS);
 
   return (
     <>
-      Hello there
+      <br />
+      Hello from Posts page
       {posts.length && posts.map((e) => <Post post={e} />)}
     </>
   );
