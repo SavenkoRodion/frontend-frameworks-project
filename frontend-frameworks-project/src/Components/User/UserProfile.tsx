@@ -15,9 +15,10 @@ const UserProfile = (props: Props) => {
     JsonApiEndpoitsEnum.USERS,
     `username=${userName}`
   );
+  console.log( apiReponse[0]);
   if (apiReponse.length !== 1) redirect("/");
-
   const [useData] = useState(apiReponse[0]);
+
   console.log(useData, apiReponse[0]);
 
   return <div>Hello from {userName}</div>;
