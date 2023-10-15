@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import TPost from "../../Model/TPost";
 
 type PostProps = {
@@ -9,7 +10,7 @@ const Post = ({ post, userName }: PostProps) => {
   return (
     <div style={{ border: "1px solid black" }}>
       <br />
-      userName: {userName}
+      Author: <Link to={`/${userName}`}>{userName}</Link>
       <br />
       title: {post.title}
       <br />
