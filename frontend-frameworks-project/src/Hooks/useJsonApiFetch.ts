@@ -1,19 +1,20 @@
-import { useState, useEffect } from "react";
 import JsonApiEndpoitsEnum from "../Model/JsonApiEndpoitsEnum";
 
-const useJsonApiFetch = <GenericType>(
+const jsonApiFetch = async <GenericType>(
   endpoint: JsonApiEndpoitsEnum,
-  query: string = ""
-) => {
-  const [data, setData] = useState<GenericType[]>([]);
-
-  useEffect(() => {
-    fetch(`https://jsonplaceholder.typicode.com/${endpoint}?${query}`)
-      .then((response) => response.json())
-      .then((data: GenericType[]) => setData(data));
-  }, []);
-
-  return data;
+  query: string = "",
+  setter: React.Dispatch<React.SetStateAction<GenericType[]>>
+): Promise<void> => {
+  const response = await fetch(
+    `https://jsonplaceholder.typicode.com/${endpoint}?${query}`
+  );
+  // .then((response) => response.json())
+  // .then((data: GenericType[]) => {
+  //   return data;
+  // });
+  const lol = await response.json();
+  setter(lol);
+  console.log("loading is over", lol);
 };
 
-export default useJsonApiFetch;
+export default jsonApiFetch;

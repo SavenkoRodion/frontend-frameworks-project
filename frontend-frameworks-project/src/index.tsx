@@ -15,7 +15,7 @@ root.render(
         <Route path="/" element={<Layout />}>
           <Route index element={<Posts />} />
           <Route path="posts" element={<Posts />} />
-          <Route path="profile/:userName?" element={<UserProfile />} />
+          <Route path=":userName" element={<UserProfile />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -1,14 +1,21 @@
 import TPost from "../../Model/TPost";
 import JsonApiEndpoitsEnum from "../../Model/JsonApiEndpoitsEnum";
-import useJsonApiFetch from "../../Hooks/useJsonApiFetch";
+import jsonApiFetch from "../../Hooks/useJsonApiFetch";
 import Post from "./Post";
 import { TUser } from "../../Model/TUser";
 import TComment from "../../Model/TComments";
+import { useEffect, useState } from "react";
 
 const Posts = () => {
-  const posts = useJsonApiFetch<TPost>(JsonApiEndpoitsEnum.POSTS);
-  const users = useJsonApiFetch<TUser>(JsonApiEndpoitsEnum.USERS);
-  const comments = useJsonApiFetch<TComment>(JsonApiEndpoitsEnum.COMMENTS);
+  const [posts, setPosts] = useState<TPost[]>([]);
+  const [users, setUsers] = useState<TUser[]>([]);
+  const [comments, setComments] = useState<TComment[]>([]);
+
+  useEffect(() => {
+    jsonApiFetch<TPost>(JsonApiEndpoitsEnum.POSTS, "", setPosts);
+    jsonApiFetch<TUser>(JsonApiEndpoitsEnum.USERS, "", setUsers);
+    jsonApiFetch<TComment>(JsonApiEndpoitsEnum.COMMENTS, "", setComments);
+  }, []);
 
   return (
     <>

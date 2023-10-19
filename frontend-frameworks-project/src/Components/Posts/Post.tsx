@@ -5,11 +5,10 @@ import TComment from "../../Model/TComments";
 type PostProps = {
   post: TPost;
   userName: string;
-  comments: TComment[] | undefined; 
+  comments: TComment[] | undefined;
 };
 
 const Post = ({ post, userName, comments }: PostProps) => {
-  console.log(comments)
   return (
     <div style={{ border: "1px solid black" }}>
       <br />
@@ -21,7 +20,16 @@ const Post = ({ post, userName, comments }: PostProps) => {
       <br />
       <br />
       <div style={{ border: "1px solid black" }}>
-        {comments?.length ?? comments?.map((e)=><span style={{ border: "1px solid black" }}>{e.body}</span>)}
+        {comments?.length &&
+          comments?.map((e) => (
+            <>
+              <span style={{ border: "1px solid black", display: "block" }}>
+                {e.body}
+              </span>
+              <br />
+              <br />
+            </>
+          ))}
       </div>
     </div>
   );
