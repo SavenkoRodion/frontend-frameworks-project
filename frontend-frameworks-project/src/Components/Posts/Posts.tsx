@@ -1,6 +1,6 @@
 import TPost from "../../Model/TPost";
 import JsonApiEndpoitsEnum from "../../Model/JsonApiEndpoitsEnum";
-import jsonApiFetch from "../../Hooks/useJsonApiFetch";
+import jsonApiFetch from "../../Hooks/jsonApiFetch";
 import Post from "./Post";
 import { TUser } from "../../Model/TUser";
 import TComment from "../../Model/TComments";

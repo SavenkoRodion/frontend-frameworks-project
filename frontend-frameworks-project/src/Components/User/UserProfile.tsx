@@ -1,6 +1,6 @@
 import { redirect } from "react-router-dom";
 import useUserName from "../../Hooks/useUserName";
-import jsonApiFetch from "../../Hooks/useJsonApiFetch";
+import jsonApiFetch from "../../Hooks/jsonApiFetch";
 import { TUser } from "../../Model/TUser";
 import JsonApiEndpoitsEnum from "../../Model/JsonApiEndpoitsEnum";
 import { useEffect, useState } from "react";
