@@ -20,7 +20,7 @@ const Posts = () => {
   return (
     <>
       <br />
-      Hello from Posts page
+      This is Posts page
       {posts.length &&
         posts.map((e) => (
           <Post
