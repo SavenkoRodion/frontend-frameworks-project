@@ -12,7 +12,7 @@ const Post = ({ post, userName, comments }: PostProps) => {
   return (
     <div style={{ border: "1px solid black" }}>
       <br />
-      Author: <Link to={`/${userName}`}>{userName}</Link>
+      Post Author: <Link to={`/${userName}`}>{userName}</Link>
       <br />
       title: {post.title}
       <br />
@@ -20,10 +20,15 @@ const Post = ({ post, userName, comments }: PostProps) => {
       <br />
       <br />
       <div style={{ border: "1px solid black" }}>
+        Post comments:
+        <br />
+        <br />
         {comments?.length &&
           comments?.map((e) => (
             <>
               <span style={{ border: "1px solid black", display: "block" }}>
+                Comment Author: {e.email}
+                <hr />
                 {e.body}
               </span>
               <br />

@@ -8,13 +8,11 @@ const jsonApiFetch = async <GenericType>(
   const response = await fetch(
     `https://jsonplaceholder.typicode.com/${endpoint}?${query}`
   );
-  // .then((response) => response.json())
-  // .then((data: GenericType[]) => {
-  //   return data;
-  // });
-  const lol = await response.json();
-  setter(lol);
-  console.log("loading is over", lol);
+
+  const responseData = await response.json();
+  setter(responseData);
+
+  console.log("loading is over", responseData);
 };
 
 export default jsonApiFetch;
