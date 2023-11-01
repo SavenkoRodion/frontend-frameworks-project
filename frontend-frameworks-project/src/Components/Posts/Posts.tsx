@@ -5,6 +5,7 @@ import Post from "./Post";
 import { TUser } from "../../Model/TUser";
 import TComment from "../../Model/TComments";
 import { useEffect, useState } from "react";
+import { Box } from "@mui/material";
 
 const Posts = () => {
   const [posts, setPosts] = useState<TPost[]>([]);
@@ -18,9 +19,14 @@ const Posts = () => {
   }, []);
 
   return (
-    <>
-      <br />
-      This is Posts page
+    <Box
+      sx={{
+        maxWidth: "960px",
+        display: "flex",
+        flexDirection: "column",
+        justifySelf: "center",
+      }}
+    >
       {posts.length &&
         posts.map((e) => (
           <Post
@@ -29,7 +35,7 @@ const Posts = () => {
             comments={comments.filter((comment) => comment.postId === e.id)}
           />
         ))}
-    </>
+    </Box>
   );
 };
 

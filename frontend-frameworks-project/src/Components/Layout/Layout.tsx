@@ -19,15 +19,14 @@ const Layout = () => {
       <CssBaseline />
       <AppBar position="sticky">
         <Toolbar>
-          <Link href="/" variant="h5" color="inherit" align="left">
+          <Link href="/" variant="h5" color="inherit" align="center">
             React zaliczeniowy
           </Link>
         </Toolbar>
       </AppBar>
-      Hello world from Layout
-      <br />
-      Home
-      <Outlet />
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <Outlet />
+      </Box>
     </div>
   );
 };
