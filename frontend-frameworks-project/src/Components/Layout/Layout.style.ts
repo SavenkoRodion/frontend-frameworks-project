@@ -1,6 +1,4 @@
-const Container: React.CSSProperties = {
-  backgroundColor: "black",
-};
+const Container: React.CSSProperties = {};
 
 const styles = { Container };
 
