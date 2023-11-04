@@ -5,6 +5,7 @@ import Post from "./Post";
 import { TUser } from "../../Model/TUser";
 import TComment from "../../Model/TComments";
 import { useEffect, useState } from "react";
+import { Box } from "@mui/material";
 
 const Posts = () => {
   const [posts, setPosts] = useState<TPost[]>([]);
@@ -19,8 +20,6 @@ const Posts = () => {
 
   return (
     <>
-      <br />
-      This is Posts page
       {posts.length &&
         posts.map((e) => (
           <Post
