@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
 import TPost from "../../Model/TPost";
 import TComment from "../../Model/TComments";
+import { Box, Link, Typography } from "@mui/material";
 
 type PostProps = {
   post: TPost;
@@ -10,33 +10,39 @@ type PostProps = {
 
 const Post = ({ post, userName, comments }: PostProps) => {
   return (
-    <div style={{ border: "1px solid black" }}>
-      <br />
-      Post Author: <Link to={`/${userName}`}>{userName}</Link>
-      <br />
-      title: {post.title}
-      <br />
-      body: {post.body}
-      <br />
-      <br />
-      <div style={{ border: "1px solid black" }}>
+    <Box
+      sx={{
+        border: "1px solid black",
+        borderRadius: "5px",
+        marginBottom: "30px",
+        padding: "20px",
+      }}
+    >
+      <Typography>
+        Posted by <Link href={`/${userName}`}>{userName}</Link>
+      </Typography>
+      <Typography component="h2" variant="h4">
+        {post.title}
+      </Typography>
+      <Typography>body: {post.body}</Typography>
+      {/* <div>
         Post comments:
         <br />
         <br />
         {comments?.length &&
           comments?.map((e) => (
             <>
-              <span style={{ border: "1px solid black", display: "block" }}>
+              <span style={{ display: "block" }}>
                 Comment Author: {e.email}
-                <hr />
+                <br />
                 {e.body}
               </span>
               <br />
               <br />
             </>
           ))}
-      </div>
-    </div>
+      </div> */}
+    </Box>
   );
 };
 

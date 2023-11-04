@@ -15,7 +15,7 @@ import SearchIcon from "@mui/icons-material/Search";
 
 const Layout = () => {
   return (
-    <div style={styles.Container}>
+    <Box style={styles.Container}>
       <CssBaseline />
       <AppBar position="sticky">
         <Toolbar>
@@ -24,10 +24,21 @@ const Layout = () => {
           </Link>
         </Toolbar>
       </AppBar>
-      <Box sx={{ display: "flex", justifyContent: "center" }}>
-        <Outlet />
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <Box
+          sx={{
+            maxWidth: "960px",
+          }}
+        >
+          <Outlet />
+        </Box>
       </Box>
-    </div>
+    </Box>
   );
 };
 

@@ -19,14 +19,7 @@ const Posts = () => {
   }, []);
 
   return (
-    <Box
-      sx={{
-        maxWidth: "960px",
-        display: "flex",
-        flexDirection: "column",
-        justifySelf: "center",
-      }}
-    >
+    <>
       {posts.length &&
         posts.map((e) => (
           <Post
@@ -35,7 +28,7 @@ const Posts = () => {
             comments={comments.filter((comment) => comment.postId === e.id)}
           />
         ))}
-    </Box>
+    </>
   );
 };
 
