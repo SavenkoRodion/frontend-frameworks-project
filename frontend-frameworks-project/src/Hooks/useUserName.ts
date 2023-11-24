@@ -1,9 +1,9 @@
-import { useMatch } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const useUserName = () => {
-  const match = useMatch("/:userName");
+  const { userName } = useParams();
 
-  return match?.params.userName;
+  return userName;
 };
 
 export default useUserName;
