@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import TPost from "../../Model/TPost";
 import TComment from "../../Model/TComments";
 import Post from "../Posts/Post";
+import { Link } from "@mui/material";
 
 type Props = {};
 
@@ -26,7 +27,7 @@ const UserProfile = (props: Props) => {
       `username=${userName}`,
       setData
     );
-  }, []);
+  }, [userName]);
 
   useEffect(() => {
     setUserData(data[0]);
@@ -48,8 +49,6 @@ const UserProfile = (props: Props) => {
     );
   }, [userData]);
 
-  console.log(userData);
-
   return (
     <div>
       Hello from {userData?.username}
@@ -57,10 +56,10 @@ const UserProfile = (props: Props) => {
       User company is {userData?.company?.name}
       <br />
       <br />
-      View user albums
+      <Link href={`/${userName}/albums`}>View user albums</Link>
       <br />
       <br />
-      View user todos
+      <Link href={`/${userName}/todos`}>View user todos</Link>
       <br />
       <br />
       {userData?.username} posts
@@ -69,8 +68,13 @@ const UserProfile = (props: Props) => {
       <br />
       {userPosts.length && userName && (
         <>
-          {userPosts.map((e) => (
-            <Post post={e} userName={userName} comments={userComments} />
+          {userPosts.map((e, i) => (
+            <Post
+              key={i}
+              post={e}
+              userName={userName}
+              comments={userComments}
+            />
           ))}
         </>
       )}
