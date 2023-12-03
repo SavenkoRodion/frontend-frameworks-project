@@ -6,6 +6,7 @@ import Posts from "./Components/Posts/Posts";
 import UserProfile from "./Components/User/UserProfile";
 import Todos from "./Components/Todos/Todos";
 import Albums from "./Components/Albums/Albums";
+import Users from "./Components/User/Users";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -17,6 +18,7 @@ root.render(
         <Route path="/" element={<Layout />}>
           <Route index element={<Posts />} />
           <Route path="posts" element={<Posts />} />
+          <Route path="users" element={<Users />} />
           <Route path=":userName" element={<UserProfile />} />
           <Route path=":userName/todos" element={<Todos />} />
           <Route path=":userName/albums" element={<Albums />} />

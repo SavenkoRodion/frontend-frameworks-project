@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import TPost from "../../Model/TPost";
 import TComment from "../../Model/TComments";
 import Post from "../Posts/Post";
-import { Link } from "@mui/material";
+import { AppBar, Box, Link, Toolbar } from "@mui/material";
 
 type Props = {};
 
@@ -50,35 +50,51 @@ const UserProfile = (props: Props) => {
   }, [userData]);
 
   return (
-    <div>
-      Hello from {userData?.username}
-      <br />
-      User company is {userData?.company?.name}
-      <br />
-      <br />
-      <Link href={`/${userName}/albums`}>View user albums</Link>
-      <br />
-      <br />
-      <Link href={`/${userName}/todos`}>View user todos</Link>
-      <br />
-      <br />
-      {userData?.username} posts
-      <hr />
-      <br />
-      <br />
-      {userPosts.length && userName && (
-        <>
-          {userPosts.map((e, i) => (
-            <Post
-              key={i}
-              post={e}
-              userName={userName}
-              comments={userComments}
-            />
-          ))}
-        </>
-      )}
-    </div>
+    <>
+      <Toolbar>
+        <Link href="/Users" variant="body1" color="inherit" align="center">
+          User profile
+        </Link>
+        <Link href="/" variant="body1" color="inherit" align="center">
+          Posts
+        </Link>
+        <Link href="/Posts" variant="body1" color="inherit" align="center">
+          Albums
+        </Link>
+        <Link href="/Users" variant="body1" color="inherit" align="center">
+          Todos
+        </Link>
+      </Toolbar>
+      <Box>
+        Hello from {userData?.username}
+        <br />
+        User company is {userData?.company?.name}
+        <br />
+        <br />
+        <Link href={`/${userName}/albums`}>View user albums</Link>
+        <br />
+        <br />
+        <Link href={`/${userName}/todos`}>View user todos</Link>
+        <br />
+        <br />
+        {userData?.username} posts
+        <hr />
+        <br />
+        <br />
+        {userPosts.length && userName && (
+          <>
+            {userPosts.map((e, i) => (
+              <Post
+                key={i}
+                post={e}
+                userName={userName}
+                comments={userComments}
+              />
+            ))}
+          </>
+        )}
+      </Box>
+    </>
   );
 };
 
