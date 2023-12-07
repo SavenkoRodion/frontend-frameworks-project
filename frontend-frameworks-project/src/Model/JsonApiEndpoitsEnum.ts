@@ -1,4 +1,4 @@
-enum JsonApiEndpoitsEnum {
+enum JsonApiEndpointsEnum {
   POSTS = "posts",
   COMMENTS = "comments",
   ALBUMS = "albums",
@@ -7,4 +7,4 @@ enum JsonApiEndpoitsEnum {
   USERS = "users",
 }
 
-export default JsonApiEndpoitsEnum;
+export default JsonApiEndpointsEnum;
