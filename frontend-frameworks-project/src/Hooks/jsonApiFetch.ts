@@ -1,7 +1,7 @@
-import JsonApiEndpoitsEnum from "../Model/JsonApiEndpoitsEnum";
+import JsonApiEndpointsEnum from "../Model/JsonApiEndpointsEnum";
 
 const jsonApiFetch = async <GenericType>(
-  endpoint: JsonApiEndpoitsEnum,
+  endpoint: JsonApiEndpointsEnum,
   query: string = "",
   setter: React.Dispatch<React.SetStateAction<GenericType[]>>
 ): Promise<void> => {

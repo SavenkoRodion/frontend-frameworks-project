@@ -1,11 +1,10 @@
 import TPost from "../../Model/TPost";
-import JsonApiEndpoitsEnum from "../../Model/JsonApiEndpoitsEnum";
+import JsonApiEndpointsEnum from "../../Model/JsonApiEndpointsEnum";
 import jsonApiFetch from "../../Hooks/jsonApiFetch";
 import Post from "./Post";
 import { TUser } from "../../Model/TUser";
 import TComment from "../../Model/TComments";
 import { useEffect, useState } from "react";
-import { Box } from "@mui/material";
 
 const Posts = () => {
   const [posts, setPosts] = useState<TPost[]>([]);
@@ -13,9 +12,9 @@ const Posts = () => {
   const [comments, setComments] = useState<TComment[]>([]);
 
   useEffect(() => {
-    jsonApiFetch<TPost>(JsonApiEndpoitsEnum.POSTS, "", setPosts);
-    jsonApiFetch<TUser>(JsonApiEndpoitsEnum.USERS, "", setUsers);
-    jsonApiFetch<TComment>(JsonApiEndpoitsEnum.COMMENTS, "", setComments);
+    jsonApiFetch<TPost>(JsonApiEndpointsEnum.POSTS, "", setPosts);
+    jsonApiFetch<TUser>(JsonApiEndpointsEnum.USERS, "", setUsers);
+    jsonApiFetch<TComment>(JsonApiEndpointsEnum.COMMENTS, "", setComments);
   }, []);
 
   return (
