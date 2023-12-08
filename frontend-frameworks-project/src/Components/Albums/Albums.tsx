@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
 import Album from "./Album";
 import jsonApiFetch from "../../Hooks/jsonApiFetch";
-import JsonApiEndpoitsEnum from "../../Model/JsonApiEndpoitsEnum";
+import JsonApiEndpointsEnum from "../../Model/JsonApiEndpointsEnum";
 import { TUser } from "../../Model/TUser";
-import useUserName from "../../Hooks/useUserName";
+import useURLParams from "../../Hooks/useURLParams";
 import TAlbums from "../../Model/TAlbums";
 
 const Albums = () => {
-  const userName = useUserName();
+  const { userName } = useURLParams();
   const [albums, setAlbums] = useState<TAlbums[]>([]);
   const [data, setData] = useState<TUser[]>([]);
   const [userData, setUserData] = useState<TUser>();
 
   useEffect(() => {
     jsonApiFetch<TUser>(
-      JsonApiEndpoitsEnum.USERS,
+      JsonApiEndpointsEnum.USERS,
       `username=${userName}`,
       setData
     );
@@ -26,7 +26,7 @@ const Albums = () => {
 
   useEffect(() => {
     jsonApiFetch<TAlbums>(
-      JsonApiEndpoitsEnum.ALBUMS,
+      JsonApiEndpointsEnum.ALBUMS,
       `userId=${userData?.id}`,
       setAlbums
     );
@@ -34,7 +34,7 @@ const Albums = () => {
 
   return (
     <>
-      {albums.length && albums.map((e, i) => <Album key={i} title={e.title} />)}
+      {albums.length && albums.map((e, i) => <Album key={i} title={e.title} albumId={e.id} />)}
     </>
   );
 };

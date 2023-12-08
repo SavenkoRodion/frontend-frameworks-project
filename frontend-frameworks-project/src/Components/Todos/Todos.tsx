@@ -1,20 +1,20 @@
-import JsonApiEndpoitsEnum from "../../Model/JsonApiEndpoitsEnum";
+import JsonApiEndpointsEnum from "../../Model/JsonApiEndpointsEnum";
 import jsonApiFetch from "../../Hooks/jsonApiFetch";
 import { TUser } from "../../Model/TUser";
 import { useEffect, useState } from "react";
-import useUserName from "../../Hooks/useUserName";
+import useURLParams from "../../Hooks/useURLParams";
 import TTodos from "../../Model/TTodos";
 import Todo from "./Todo";
 
 const Todos = () => {
-  const userName = useUserName();
+  const { userName } = useURLParams();
   const [todos, setTodos] = useState<TTodos[]>([]);
   const [data, setData] = useState<TUser[]>([]);
   const [userData, setUserData] = useState<TUser>();
 
   useEffect(() => {
     jsonApiFetch<TUser>(
-      JsonApiEndpoitsEnum.USERS,
+      JsonApiEndpointsEnum.USERS,
       `username=${userName}`,
       setData
     );
@@ -26,7 +26,7 @@ const Todos = () => {
 
   useEffect(() => {
     jsonApiFetch<TTodos>(
-      JsonApiEndpoitsEnum.TODOS,
+      JsonApiEndpointsEnum.TODOS,
       `userId=${userData?.id}`,
       setTodos
     );

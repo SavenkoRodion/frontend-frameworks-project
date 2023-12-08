@@ -1,17 +1,7 @@
 import { Outlet } from "react-router-dom";
 import styles from "./Layout.style";
-import {
-  AppBar,
-  Box,
-  Button,
-  CssBaseline,
-  IconButton,
-  Link,
-  Toolbar,
-  Typography,
-} from "@mui/material";
+import { AppBar, Box, CssBaseline, Link, Toolbar } from "@mui/material";
 import React from "react";
-import SearchIcon from "@mui/icons-material/Search";
 
 const Layout = () => {
   return (
@@ -33,12 +23,12 @@ const Layout = () => {
       <Box
         sx={{
           display: "flex",
-          justifyContent: "center",
+          justifyContent: "center"
         }}
       >
         <Box
           sx={{
-            maxWidth: "960px",
+            maxWidth: "960px"
           }}
         >
           <Outlet />

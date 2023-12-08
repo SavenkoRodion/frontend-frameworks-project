@@ -1,5 +1,5 @@
 import TPost from "../../Model/TPost";
-import JsonApiEndpoitsEnum from "../../Model/JsonApiEndpoitsEnum";
+import JsonApiEndpointsEnum from "../../Model/JsonApiEndpointsEnum";
 import jsonApiFetch from "../../Hooks/jsonApiFetch";
 import Post from "./Post";
 import { TUser } from "../../Model/TUser";
@@ -18,9 +18,9 @@ const Posts = () => {
   const postsPerPage: number = 10;
 
   useEffect(() => {
-    jsonApiFetch<TPost>(JsonApiEndpoitsEnum.POSTS, "", setAllPosts);
-    jsonApiFetch<TUser>(JsonApiEndpoitsEnum.USERS, "", setUsers);
-    jsonApiFetch<TComment>(JsonApiEndpoitsEnum.COMMENTS, "", setComments);
+    jsonApiFetch<TPost>(JsonApiEndpointsEnum.POSTS, "", setAllPosts);
+    jsonApiFetch<TUser>(JsonApiEndpointsEnum.USERS, "", setUsers);
+    jsonApiFetch<TComment>(JsonApiEndpointsEnum.COMMENTS, "", setComments);
   }, []);
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import JsonApiEndpoitsEnum from "../../Model/JsonApiEndpoitsEnum";
+import JsonApiEndpointsEnum from "../../Model/JsonApiEndpointsEnum";
 import jsonApiFetch from "../../Hooks/jsonApiFetch";
 import { TUser } from "../../Model/TUser";
 import { useEffect, useState } from "react";
@@ -8,7 +8,7 @@ const Posts = () => {
   const [users, setUsers] = useState<TUser[]>([]);
 
   useEffect(() => {
-    jsonApiFetch<TUser>(JsonApiEndpoitsEnum.USERS, "", setUsers);
+    jsonApiFetch<TUser>(JsonApiEndpointsEnum.USERS, "", setUsers);
   }, []);
 
   return (

@@ -1,8 +1,8 @@
 import { redirect } from "react-router-dom";
-import useUserName from "../../Hooks/useUserName";
+import useURLParams from "../../Hooks/useURLParams";
 import jsonApiFetch from "../../Hooks/jsonApiFetch";
 import { TUser } from "../../Model/TUser";
-import JsonApiEndpoitsEnum from "../../Model/JsonApiEndpoitsEnum";
+import JsonApiEndpointsEnum from "../../Model/JsonApiEndpointsEnum";
 import { useEffect, useState } from "react";
 import TPost from "../../Model/TPost";
 import TComment from "../../Model/TComments";
@@ -12,7 +12,7 @@ import { AppBar, Box, Link, Toolbar } from "@mui/material";
 type Props = {};
 
 const UserProfile = (props: Props) => {
-  const userName = useUserName();
+  const { userName } = useURLParams();
   if (!userName) redirect("/");
 
   const [data, setData] = useState<TUser[]>([]);
@@ -23,7 +23,7 @@ const UserProfile = (props: Props) => {
 
   useEffect(() => {
     jsonApiFetch<TUser>(
-      JsonApiEndpoitsEnum.USERS,
+      JsonApiEndpointsEnum.USERS,
       `username=${userName}`,
       setData
     );
@@ -37,13 +37,13 @@ const UserProfile = (props: Props) => {
     if (!userData) return;
     if (!userData.id) return;
     jsonApiFetch<TPost>(
-      JsonApiEndpoitsEnum.POSTS,
+      JsonApiEndpointsEnum.POSTS,
       `id=${userData?.id}`,
       setUserPosts
     );
     if (!userData.name) return;
     jsonApiFetch<TComment>(
-      JsonApiEndpoitsEnum.COMMENTS,
+      JsonApiEndpointsEnum.COMMENTS,
       `name=${userData?.name}`,
       setUserComments
     );
