@@ -5,10 +5,11 @@ import { Box, Link, Typography } from "@mui/material";
 type PostProps = {
   post: TPost;
   userName: string;
-  comments: TComment[] | undefined;
+  comments?: TComment[];
+  isExpanded?: boolean;
 };
 
-const Post = ({ post, userName, comments }: PostProps) => {
+const Post = ({ post, userName, comments, isExpanded = false }: PostProps) => {
   return (
     <Box
       sx={{
@@ -19,29 +20,31 @@ const Post = ({ post, userName, comments }: PostProps) => {
       }}
     >
       <Typography>
-        Posted by <Link href={`/${userName}`}>{userName}</Link>
+        Posted by <Link href={`/User/${userName}`}>{userName}</Link>
       </Typography>
       <Typography component="h2" variant="h4">
         {post.title}
       </Typography>
       <Typography>body: {post.body}</Typography>
-      {/* <div>
-        Post comments:
-        <br />
-        <br />
-        {comments?.length &&
-          comments?.map((e) => (
-            <>
-              <span style={{ display: "block" }}>
-                Comment Author: {e.email}
+      {isExpanded && (
+        <Box>
+          Post comments:
+          <br />
+          <br />
+          {comments?.length &&
+            comments?.map((e) => (
+              <>
+                <span style={{ display: "block" }}>
+                  Comment Author: {e.email}
+                  <br />
+                  {e.body}
+                </span>
                 <br />
-                {e.body}
-              </span>
-              <br />
-              <br />
-            </>
-          ))}
-      </div> */}
+                <br />
+              </>
+            ))}
+        </Box>
+      )}
     </Box>
   );
 };

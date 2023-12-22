@@ -5,7 +5,7 @@ import Post from "./Post";
 import { TUser } from "../../Model/TUser";
 import TComment from "../../Model/TComments";
 import { useEffect, useState } from "react";
-import { Pagination } from "@mui/material";
+import { CircularProgress, Pagination } from "@mui/material";
 
 const Posts = () => {
   const [allPosts, setAllPosts] = useState<TPost[]>([]);
@@ -34,7 +34,6 @@ const Posts = () => {
     event: React.ChangeEvent<unknown>,
     page: number
   ): void => {
-    console.log("heree");
     setPagePosts(
       allPosts.slice(countPages * page - postsPerPage, countPages * page)
     );
@@ -43,15 +42,18 @@ const Posts = () => {
 
   return (
     <>
-      {pagePosts.length &&
+      {pagePosts.length ? (
         pagePosts.map((e) => (
           <Post
             post={e}
             userName={users.find((user) => user.id === e.userId)?.username!}
             comments={comments.filter((comment) => comment.postId === e.id)}
           />
-        ))}
-      {countPages && (
+        ))
+      ) : (
+        <CircularProgress />
+      )}
+      {countPages && pagePosts.length ? (
         <Pagination
           sx={{ ul: { justifyContent: "center" }, marginBottom: "20px" }}
           count={countPages}
@@ -63,6 +65,8 @@ const Posts = () => {
           showLastButton
           showFirstButton
         />
+      ) : (
+        <></>
       )}
     </>
   );
