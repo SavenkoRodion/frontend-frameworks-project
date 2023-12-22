@@ -13,6 +13,7 @@ const Albums = () => {
   const [userData, setUserData] = useState<TUser>();
 
   useEffect(() => {
+    console.log(userName);
     jsonApiFetch<TUser>(
       JsonApiEndpointsEnum.USERS,
       `username=${userName}`,
@@ -34,7 +35,8 @@ const Albums = () => {
 
   return (
     <>
-      {albums.length && albums.map((e, i) => <Album key={i} title={e.title} albumId={e.id} />)}
+      {albums.length &&
+        albums.map((e, i) => <Album key={i} title={e.title} albumId={e.id} />)}
     </>
   );
 };

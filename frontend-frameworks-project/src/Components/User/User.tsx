@@ -1,4 +1,4 @@
-import { Box, Link, Typography } from "@mui/material";
+import { Box, Link } from "@mui/material";
 import { TComapany } from "../../Model/TUser";
 
 interface UserProps {
@@ -7,7 +7,7 @@ interface UserProps {
   company: TComapany;
 }
 
-const Album = ({ userName, name, company }: UserProps) => {
+const User = ({ userName }: UserProps) => {
   return (
     <Box
       sx={{
@@ -19,11 +19,11 @@ const Album = ({ userName, name, company }: UserProps) => {
         width: "500px",
       }}
     >
-      <Link href={`/${userName}`} variant="h4">
+      <Link href={`/User/${userName}`} variant="h4">
         Name: {userName}
       </Link>
     </Box>
   );
 };
 
-export default Album;
+export default User;

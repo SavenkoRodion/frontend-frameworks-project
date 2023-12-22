@@ -11,8 +11,6 @@ const jsonApiFetch = async <GenericType>(
 
   const responseData = await response.json();
   setter(responseData);
-
-  console.log("loading is over", responseData);
 };
 
 export default jsonApiFetch;

@@ -9,7 +9,7 @@ interface AlbumProps {
 const Album = ({ title, albumId }: AlbumProps) => {
   const { userName } = useURLParams();
   return (
-    <Link href={`/${userName}/albums/${albumId.toString()}`}>
+    <Link href={`/User/${userName}/Albums/${albumId.toString()}`}>
       <Box
         sx={{
           border: "1px solid black",
@@ -17,7 +17,7 @@ const Album = ({ title, albumId }: AlbumProps) => {
           marginBottom: " 20px",
           padding: "10px",
           height: "auto",
-          width: "500px"
+          width: "500px",
         }}
       >
         <Typography component="h2" variant="h4">
