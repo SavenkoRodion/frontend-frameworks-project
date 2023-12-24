@@ -2,12 +2,13 @@ import JsonApiEndpointsEnum from "../../Model/JsonApiEndpointsEnum";
 import jsonApiFetch from "../../Hooks/jsonApiFetch";
 import { TUser } from "../../Model/TUser";
 import { useEffect, useState } from "react";
-import useURLParams from "../../Hooks/useURLParams";
 import TTodos from "../../Model/TTodos";
 import Todo from "./Todo";
+import { Box, CircularProgress } from "@mui/material";
+import { useOutletContext } from "react-router-dom";
 
 const Todos = () => {
-  const { userName } = useURLParams();
+  const userName: string = useOutletContext();
   const [todos, setTodos] = useState<TTodos[]>([]);
   const [data, setData] = useState<TUser[]>([]);
   const [userData, setUserData] = useState<TUser>();
@@ -35,12 +36,17 @@ const Todos = () => {
   console.log(todos);
 
   return (
-    <>
-      {todos.length &&
+    <Box
+      sx={!todos.length ? { display: "flex", justifyContent: "center" } : {}}
+    >
+      {todos.length ? (
         todos.map((e, i) => (
           <Todo key={i} title={e.title} completed={e.completed} />
-        ))}
-    </>
+        ))
+      ) : (
+        <CircularProgress />
+      )}
+    </Box>
   );
 };
 

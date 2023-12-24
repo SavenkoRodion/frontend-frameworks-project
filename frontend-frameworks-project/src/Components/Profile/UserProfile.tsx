@@ -1,16 +1,12 @@
-import { redirect } from "react-router-dom";
-import useURLParams from "../../Hooks/useURLParams";
+import { useOutletContext } from "react-router-dom";
 import jsonApiFetch from "../../Hooks/jsonApiFetch";
 import { TUser } from "../../Model/TUser";
 import JsonApiEndpointsEnum from "../../Model/JsonApiEndpointsEnum";
 import { useEffect, useState } from "react";
 import { Typography } from "@mui/material";
 
-type Props = {};
-
-const UserProfile = (props: Props) => {
-  const { userName } = useURLParams();
-  if (!userName) redirect("/");
+const UserProfile = () => {
+  const userName: string = useOutletContext();
 
   const [data, setData] = useState<TUser[]>([]);
   const [userData, setUserData] = useState<TUser>();

@@ -4,12 +4,12 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./Components/Layout/Layout";
 import Posts from "./Components/Posts/Posts";
 import UserProfileLayout from "./Components/Layout/UserProfileLayout";
-import UserProfile from "./Components/User/UserProfile";
+import UserProfile from "./Components/Profile/UserProfile";
 import Todos from "./Components/Todos/Todos";
 import Albums from "./Components/Albums/Albums";
 import AlbumView from "./Components/Albums/AlbumView";
 import Users from "./Components/User/Users";
-import UserProfilePosts from "./Components/Posts/UserProfilePosts";
+import UserProfilePosts from "./Components/Profile/UserProfilePosts";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

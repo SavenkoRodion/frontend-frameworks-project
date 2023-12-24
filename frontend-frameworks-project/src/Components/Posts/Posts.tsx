@@ -43,8 +43,9 @@ const Posts = () => {
   return (
     <>
       {pagePosts.length ? (
-        pagePosts.map((e) => (
+        pagePosts.map((e, i) => (
           <Post
+            key={i}
             post={e}
             userName={users.find((user) => user.id === e.userId)?.username!}
             comments={comments.filter((comment) => comment.postId === e.id)}
