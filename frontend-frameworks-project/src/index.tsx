@@ -10,6 +10,7 @@ import Albums from "./Components/Albums/Albums";
 import AlbumView from "./Components/Albums/AlbumView";
 import Users from "./Components/User/Users";
 import UserProfilePosts from "./Components/Profile/UserProfilePosts";
+import PostPage from "./Components/Posts/PostPage";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -22,6 +23,7 @@ root.render(
           <Route index element={<Posts />} />
           <Route path="posts" element={<Posts />} />
           <Route path="users" element={<Users />} />
+          <Route path="post/:postId" element={<PostPage />} />
           <Route path="User/:userName" element={<UserProfileLayout />}>
             <Route path="" element={<UserProfile />} />
             <Route path="Posts" element={<UserProfilePosts />} />
