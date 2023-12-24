@@ -6,7 +6,7 @@ import useUserName from "../../Hooks/useUserName";
 type Props = {};
 
 const UserProfile = (props: Props) => {
-  const userName = useUserName();
+  const userName: string = useUserName();
   if (!userName) redirect("/");
 
   return (
@@ -55,10 +55,10 @@ const UserProfile = (props: Props) => {
             display: "flex",
             flexDirection: "column",
             margin: "0 auto",
-            width: "500px",
+            maxWidth: "500px",
           }}
         >
-          <Outlet />
+          <Outlet context={userName} />
         </Box>
       </Box>
     </>

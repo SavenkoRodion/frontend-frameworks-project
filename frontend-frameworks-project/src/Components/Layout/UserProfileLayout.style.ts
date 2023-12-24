@@ -15,10 +15,10 @@ const ToolBarElement = {
   "&:hover": {
     background: "#1565c0",
   },
-  "&:first-child": {
+  "&:first-of-type": {
     borderRadius: "15px 0 0 15px",
   },
-  "&:last-child": {
+  "&:last-of-type": {
     borderRadius: "0 15px 15px 0",
   },
 };

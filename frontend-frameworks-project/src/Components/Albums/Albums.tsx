@@ -5,6 +5,7 @@ import JsonApiEndpointsEnum from "../../Model/JsonApiEndpointsEnum";
 import { TUser } from "../../Model/TUser";
 import useURLParams from "../../Hooks/useURLParams";
 import TAlbums from "../../Model/TAlbums";
+import { Box, CircularProgress } from "@mui/material";
 
 const Albums = () => {
   const { userName } = useURLParams();
@@ -34,10 +35,15 @@ const Albums = () => {
   }, [userData]);
 
   return (
-    <>
-      {albums.length &&
-        albums.map((e, i) => <Album key={i} title={e.title} albumId={e.id} />)}
-    </>
+    <Box
+      sx={!albums.length ? { display: "flex", justifyContent: "center" } : {}}
+    >
+      {albums.length ? (
+        albums.map((e, i) => <Album key={i} title={e.title} albumId={e.id} />)
+      ) : (
+        <CircularProgress />
+      )}
+    </Box>
   );
 };
 

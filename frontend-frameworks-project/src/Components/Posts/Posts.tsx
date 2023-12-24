@@ -1,7 +1,7 @@
 import TPost from "../../Model/TPost";
 import JsonApiEndpointsEnum from "../../Model/JsonApiEndpointsEnum";
 import jsonApiFetch from "../../Hooks/jsonApiFetch";
-import Post from "./Post";
+import Post from "./PostListElement";
 import { TUser } from "../../Model/TUser";
 import TComment from "../../Model/TComments";
 import { useEffect, useState } from "react";
@@ -28,7 +28,7 @@ const Posts = () => {
     setPagePosts(
       allPosts.slice(countPages * page - postsPerPage, countPages * page)
     );
-  }, [allPosts, postsPerPage]);
+  }, [allPosts, postsPerPage, countPages, page]);
 
   const handleChange = (
     event: React.ChangeEvent<unknown>,
@@ -43,11 +43,14 @@ const Posts = () => {
   return (
     <>
       {pagePosts.length ? (
-        pagePosts.map((e) => (
+        pagePosts.map((e, i) => (
           <Post
+            key={i}
             post={e}
             userName={users.find((user) => user.id === e.userId)?.username!}
-            comments={comments.filter((comment) => comment.postId === e.id)}
+            commentsCount={
+              comments.filter((comment) => comment.postId === e.id).length
+            }
           />
         ))
       ) : (

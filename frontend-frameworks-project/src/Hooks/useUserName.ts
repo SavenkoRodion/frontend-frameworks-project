@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
 
-const useUserName = () => {
+const useUserName = (): string => {
   const { userName } = useParams();
 
-  return userName;
+  return userName as string;
 };
 
 export default useUserName;
