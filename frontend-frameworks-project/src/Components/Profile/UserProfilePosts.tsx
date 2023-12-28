@@ -3,7 +3,7 @@ import jsonApiFetch from "../../Hooks/jsonApiFetch";
 import JsonApiEndpointsEnum from "../../Model/JsonApiEndpointsEnum";
 import TPost from "../../Model/TPost";
 import { TUser } from "../../Model/TUser";
-import Post from "../Posts/PostListElement";
+import Post from "../Posts/Post";
 import { Box, CircularProgress } from "@mui/material";
 import { useOutletContext } from "react-router-dom";
 import TComment from "../../Model/TComments";

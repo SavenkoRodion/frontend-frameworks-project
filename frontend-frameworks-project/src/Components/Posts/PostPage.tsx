@@ -4,8 +4,9 @@ import jsonApiFetch from "../../Hooks/jsonApiFetch";
 import JsonApiEndpointsEnum from "../../Model/JsonApiEndpointsEnum";
 import TPost from "../../Model/TPost";
 import TComment from "../../Model/TComments";
-import { Box, Link, Typography } from "@mui/material";
+import { Box, CircularProgress, Link, Typography } from "@mui/material";
 import { TUser } from "../../Model/TUser";
+import Post from "./Post";
 
 const PostPage = () => {
   const { postId } = useParams();
@@ -37,46 +38,35 @@ const PostPage = () => {
   }, [postId]);
 
   return (
-    <Box
-      sx={{
-        border: "1px solid black",
-        borderRadius: "5px",
-        marginBottom: "30px",
-        padding: "20px",
-      }}
-    >
-      <Box>
-        <Typography>
-          Posted by{" "}
-          <Link href={`/User/${user?.username}`}>{user?.username}</Link>
-        </Typography>
-        <Typography component="h2" variant="h4">
-          {post?.title}
-        </Typography>
-        <Typography>body: {post?.body}</Typography>
-        <Typography sx={{ marginTop: "10px" }}>
-          This post has{" "}
-          <Link href={`/post/${post?.id}`}>{comments!.length} comments</Link>
-        </Typography>
-      </Box>
-
-      <Box>
-        {comments.length &&
-          comments.map((e) => (
-            <Box
-              sx={{
-                padding: "10px 0 10px",
-                margin: "5px 0 5px",
-                borderTop: "1px solid black",
-              }}
-            >
-              <Typography>Commented by: {e.email}</Typography>
-              <Typography variant="h5">{e.name}</Typography>
-              <Typography>{e.body}</Typography>
-            </Box>
-          ))}
-      </Box>
-    </Box>
+    <>
+      {post && user?.name && comments.length ? (
+        <Post
+          post={post!}
+          userName={user!.username}
+          commentsCount={comments.length}
+        >
+          <Box>
+            {comments.length &&
+              comments.map((e, i) => (
+                <Box
+                  sx={{
+                    padding: "10px 0 10px",
+                    margin: "5px 0 5px",
+                    borderTop: "1px solid black",
+                  }}
+                  key={i}
+                >
+                  <Typography>Commented by: {e.email}</Typography>
+                  <Typography variant="h5">{e.name}</Typography>
+                  <Typography>{e.body}</Typography>
+                </Box>
+              ))}
+          </Box>
+        </Post>
+      ) : (
+        <CircularProgress />
+      )}
+    </>
   );
 };
 

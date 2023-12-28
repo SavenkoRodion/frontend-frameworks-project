@@ -20,6 +20,7 @@ const UserProfile = () => {
   }, [userName]);
 
   useEffect(() => {
+    console.log(data);
     setUserData(data[0]);
   }, [data]);
 

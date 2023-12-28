@@ -1,7 +1,7 @@
 import TPost from "../../Model/TPost";
 import JsonApiEndpointsEnum from "../../Model/JsonApiEndpointsEnum";
 import jsonApiFetch from "../../Hooks/jsonApiFetch";
-import Post from "./PostListElement";
+import Post from "./Post";
 import { TUser } from "../../Model/TUser";
 import TComment from "../../Model/TComments";
 import { useEffect, useState } from "react";
@@ -15,7 +15,7 @@ const Posts = () => {
   const [page, setPage] = useState<number>(1);
   const [countPages, setCountPages] = useState<number>(0);
 
-  const postsPerPage: number = 10;
+  const postsPerPage: number = 15;
 
   useEffect(() => {
     jsonApiFetch<TPost>(JsonApiEndpointsEnum.POSTS, "", setAllPosts);
@@ -26,7 +26,7 @@ const Posts = () => {
   useEffect(() => {
     setCountPages(Math.ceil(allPosts.length / postsPerPage));
     setPagePosts(
-      allPosts.slice(countPages * page - postsPerPage, countPages * page)
+      allPosts.slice(postsPerPage * (page - 1), postsPerPage * page)
     );
   }, [allPosts, postsPerPage, countPages, page]);
 
@@ -35,7 +35,7 @@ const Posts = () => {
     page: number
   ): void => {
     setPagePosts(
-      allPosts.slice(countPages * page - postsPerPage, countPages * page)
+      allPosts.slice(postsPerPage * (page - 1), postsPerPage * page)
     );
     setPage(page);
   };
