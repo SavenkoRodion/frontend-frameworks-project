@@ -3,28 +3,23 @@ import Album from "./Album";
 import jsonApiFetch from "../../Hooks/jsonApiFetch";
 import JsonApiEndpointsEnum from "../../Model/JsonApiEndpointsEnum";
 import { TUser } from "../../Model/TUser";
-import useURLParams from "../../Hooks/useURLParams";
 import TAlbums from "../../Model/TAlbums";
 import { Box, CircularProgress } from "@mui/material";
+import useUserName from "../../Hooks/useUserName";
+import jsonApiFetchFirst from "../../Hooks/jsonApiFetchFirst";
 
 const Albums = () => {
-  const { userName } = useURLParams();
+  const userName = useUserName();
   const [albums, setAlbums] = useState<TAlbums[]>([]);
-  const [data, setData] = useState<TUser[]>([]);
-  const [userData, setUserData] = useState<TUser>();
+  const [userData, setUserData] = useState<TUser | null>(null);
 
   useEffect(() => {
-    console.log(userName);
-    jsonApiFetch<TUser>(
+    jsonApiFetchFirst<TUser | null>(
       JsonApiEndpointsEnum.USERS,
       `username=${userName}`,
-      setData
+      setUserData
     );
   }, [userName]);
-
-  useEffect(() => {
-    setUserData(data[0]);
-  }, [data]);
 
   useEffect(() => {
     jsonApiFetch<TAlbums>(
@@ -39,7 +34,9 @@ const Albums = () => {
       sx={!albums.length ? { display: "flex", justifyContent: "center" } : {}}
     >
       {albums.length ? (
-        albums.map((e, i) => <Album key={i} title={e.title} albumId={e.id} />)
+        albums.map((album: TAlbums, i: number) => (
+          <Album key={i} title={album.title} albumId={album.id} />
+        ))
       ) : (
         <CircularProgress />
       )}

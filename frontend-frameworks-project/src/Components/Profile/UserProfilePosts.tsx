@@ -7,33 +7,32 @@ import Post from "../Posts/Post";
 import { Box, CircularProgress } from "@mui/material";
 import { useOutletContext } from "react-router-dom";
 import TComment from "../../Model/TComments";
+import jsonApiFetchFirst from "../../Hooks/jsonApiFetchFirst";
 
 const UserProfilePosts = () => {
   const userName: string = useOutletContext();
   const [userPosts, setUserPosts] = useState<TPost[]>([]);
-  const [data, setData] = useState<TUser[]>([]);
-  const [userData, setUserData] = useState<TUser>();
+  const [userData, setUserData] = useState<TUser | null>(null);
   const [comments, setComments] = useState<TComment[]>([]);
 
   useEffect(() => {
-    jsonApiFetch<TUser>(
+    jsonApiFetchFirst<TUser | null>(
       JsonApiEndpointsEnum.USERS,
       `username=${userName}`,
-      setData
+      setUserData
     );
-    console.log(userName);
   }, [userName]);
 
   useEffect(() => {
-    setUserData(data[0]);
-  }, [data]);
-
-  useEffect(() => {
-    jsonApiFetch<TPost>(
-      JsonApiEndpointsEnum.POSTS,
-      `userId=${userData?.id}`,
-      setUserPosts
-    );
+    if (userData) {
+      jsonApiFetch<TPost>(
+        JsonApiEndpointsEnum.POSTS,
+        `userId=${userData.id}`,
+        setUserPosts
+      );
+    } else {
+      setUserPosts([]);
+    }
   }, [userData]);
 
   useEffect(() => {
@@ -47,12 +46,16 @@ const UserProfilePosts = () => {
       }
     >
       {userPosts.length ? (
-        userPosts.map((e, i) => (
+        userPosts.map((userPost: TPost, i: number) => (
           <Post
             key={i}
-            post={e}
+            post={userPost}
             userName={userName}
-            commentsCount={comments.filter((c) => c.postId === e.id).length}
+            commentsCount={
+              comments.filter(
+                (comment: TComment) => comment.postId === userPost.id
+              ).length
+            }
           />
         ))
       ) : (

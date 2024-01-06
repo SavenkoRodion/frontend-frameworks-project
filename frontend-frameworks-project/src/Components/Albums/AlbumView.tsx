@@ -3,26 +3,22 @@ import { useEffect, useState } from "react";
 import { TUser } from "../../Model/TUser";
 import jsonApiFetch from "../../Hooks/jsonApiFetch";
 import JsonApiEndpointsEnum from "../../Model/JsonApiEndpointsEnum";
-import { Grid } from "@mui/material";
+import { Grid, Link } from "@mui/material";
 import TPhoto from "../../Model/TPhoto";
+import jsonApiFetchFirst from "../../Hooks/jsonApiFetchFirst";
 
 const AlbumView = () => {
   const { userName, albumId } = useURLParams();
   const [photos, setPhotos] = useState<TPhoto[]>([]);
-  const [data, setData] = useState<TUser[]>([]);
-  const [userData, setUserData] = useState<TUser>();
+  const [userData, setUserData] = useState<TUser | null>(null);
 
   useEffect(() => {
-    jsonApiFetch<TUser>(
+    jsonApiFetchFirst<TUser | null>(
       JsonApiEndpointsEnum.USERS,
       `username=${userName}`,
-      setData
+      setUserData
     );
   }, [userName]);
-
-  useEffect(() => {
-    setUserData(data[0]);
-  }, [data]);
 
   useEffect(() => {
     jsonApiFetch<TPhoto>(
@@ -34,16 +30,16 @@ const AlbumView = () => {
 
   return (
     <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-      {photos.length && photos.map((e, i) => (
-        <Grid item key={i}>
-          <a href={e.url} target="_blank" rel="noreferrer">
-            <img src={e.thumbnailUrl} alt={e.title} />
-          </a>
-        </Grid>
-      ))}
+      {photos.length &&
+        photos.map((photo: TPhoto, i: number) => (
+          <Grid item key={i}>
+            <Link href={photo.url} target="_blank" rel="noreferrer">
+              <img src={photo.thumbnailUrl} alt={photo.title} />
+            </Link>
+          </Grid>
+        ))}
     </Grid>
   );
-
 };
 
 export default AlbumView;

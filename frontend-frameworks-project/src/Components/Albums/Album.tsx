@@ -1,5 +1,5 @@
 import { Box, Link, Typography } from "@mui/material";
-import useURLParams from "../../Hooks/useURLParams";
+import useUserName from "../../Hooks/useUserName";
 
 interface AlbumProps {
   title: string;
@@ -7,7 +7,7 @@ interface AlbumProps {
 }
 
 const Album = ({ title, albumId }: AlbumProps) => {
-  const { userName } = useURLParams();
+  const userName = useUserName();
   return (
     <Link href={`/User/${userName}/Albums/${albumId.toString()}`}>
       <Box

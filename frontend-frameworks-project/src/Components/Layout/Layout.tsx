@@ -1,7 +1,6 @@
 import { Outlet } from "react-router-dom";
 import styles from "./Layout.style";
 import { AppBar, Box, CssBaseline, Link, Toolbar } from "@mui/material";
-import React from "react";
 
 const Layout = () => {
   return (
@@ -23,12 +22,12 @@ const Layout = () => {
       <Box
         sx={{
           display: "flex",
-          justifyContent: "center"
+          justifyContent: "center",
         }}
       >
         <Box
           sx={{
-            maxWidth: "960px"
+            maxWidth: "960px",
           }}
         >
           <Outlet />

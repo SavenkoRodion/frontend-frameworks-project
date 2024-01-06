@@ -28,7 +28,7 @@ const Posts = () => {
     setPagePosts(
       allPosts.slice(postsPerPage * (page - 1), postsPerPage * page)
     );
-  }, [allPosts, postsPerPage, countPages, page]);
+  }, [allPosts, postsPerPage, page]);
 
   const handleChange = (
     event: React.ChangeEvent<unknown>,
@@ -43,13 +43,13 @@ const Posts = () => {
   return (
     <>
       {pagePosts.length ? (
-        pagePosts.map((e, i) => (
+        pagePosts.map((post: TPost, i: number) => (
           <Post
             key={i}
-            post={e}
-            userName={users.find((user) => user.id === e.userId)?.username!}
+            post={post}
+            userName={users.find((user) => user.id === post.userId)?.username!}
             commentsCount={
-              comments.filter((comment) => comment.postId === e.id).length
+              comments.filter((comment) => comment.postId === post.id).length
             }
           />
         ))

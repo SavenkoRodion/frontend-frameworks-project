@@ -27,7 +27,7 @@ const Post = ({ post, userName, commentsCount, children }: PostProps) => {
       <Typography>{post.body}</Typography>
       <Typography sx={{ marginTop: "10px" }}>
         This post has{" "}
-        <Link href={`/post/${post.id}`}>{commentsCount} comments</Link>
+        <Link href={`/Post/${post.id}`}>{commentsCount} comments</Link>
       </Typography>
       {children}
     </Box>

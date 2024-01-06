@@ -14,8 +14,13 @@ const Posts = () => {
   return (
     <>
       {users.length &&
-        users.map((e: TUser) => (
-          <User userName={e.username} name={e.name} company={e.company} />
+        users.map((user: TUser, i: number) => (
+          <User
+            userName={user.username}
+            name={user.name}
+            company={user.company}
+            key={i}
+          />
         ))}
     </>
   );

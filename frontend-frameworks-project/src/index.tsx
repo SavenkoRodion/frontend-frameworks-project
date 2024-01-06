@@ -16,14 +16,14 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <React.StrictMode>
+  <>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Posts />} />
-          <Route path="posts" element={<Posts />} />
-          <Route path="users" element={<Users />} />
-          <Route path="post/:postId" element={<PostPage />} />
+          <Route path="Posts" element={<Posts />} />
+          <Route path="Users" element={<Users />} />
+          <Route path="Post/:postId" element={<PostPage />} />
           <Route path="User/:userName" element={<UserProfileLayout />}>
             <Route path="" element={<UserProfile />} />
             <Route path="Posts" element={<UserProfilePosts />} />
@@ -34,5 +34,5 @@ root.render(
         </Route>
       </Routes>
     </BrowserRouter>
-  </React.StrictMode>
+  </>
 );

@@ -4,33 +4,37 @@ import jsonApiFetch from "../../Hooks/jsonApiFetch";
 import JsonApiEndpointsEnum from "../../Model/JsonApiEndpointsEnum";
 import TPost from "../../Model/TPost";
 import TComment from "../../Model/TComments";
-import { Box, CircularProgress, Link, Typography } from "@mui/material";
+import { Box, CircularProgress, Typography } from "@mui/material";
 import { TUser } from "../../Model/TUser";
 import Post from "./Post";
+import jsonApiFetchFirst from "../../Hooks/jsonApiFetchFirst";
 
 const PostPage = () => {
   const { postId } = useParams();
-  const [postData, setPostData] = useState<TPost[]>([]);
-  const [post, setPost] = useState<TPost>();
+  const [post, setPost] = useState<TPost | null>(null);
   const [comments, setComments] = useState<TComment[]>([]);
-  const [userData, setUserData] = useState<TUser[]>([]);
-  const [user, setUser] = useState<TUser>();
+  const [user, setUser] = useState<TUser | null>(null);
 
   useEffect(() => {
-    jsonApiFetch(JsonApiEndpointsEnum.POSTS, `id=${postId}`, setPostData);
+    jsonApiFetchFirst<TPost | null>(
+      JsonApiEndpointsEnum.POSTS,
+      `id=${postId}`,
+      setPost
+    );
   }, [postId]);
 
   useEffect(() => {
-    setPost(postData[0]);
-    jsonApiFetch(JsonApiEndpointsEnum.USERS, `id=${post?.userId}`, setUserData);
-  }, [postData, post]);
+    if (post) {
+      jsonApiFetchFirst<TUser | null>(
+        JsonApiEndpointsEnum.USERS,
+        `id=${post.userId}`,
+        setUser
+      );
+    }
+  }, [post]);
 
   useEffect(() => {
-    setUser(userData[0]);
-  }, [userData]);
-
-  useEffect(() => {
-    jsonApiFetch(
+    jsonApiFetch<TComment>(
       JsonApiEndpointsEnum.COMMENTS,
       `postId=${postId}`,
       setComments
@@ -41,13 +45,13 @@ const PostPage = () => {
     <>
       {post && user?.name && comments.length ? (
         <Post
-          post={post!}
-          userName={user!.username}
+          post={post}
+          userName={user.username}
           commentsCount={comments.length}
         >
           <Box>
             {comments.length &&
-              comments.map((e, i) => (
+              comments.map((comment: TComment, i: number) => (
                 <Box
                   sx={{
                     padding: "10px 0 10px",
@@ -56,9 +60,9 @@ const PostPage = () => {
                   }}
                   key={i}
                 >
-                  <Typography>Commented by: {e.email}</Typography>
-                  <Typography variant="h5">{e.name}</Typography>
-                  <Typography>{e.body}</Typography>
+                  <Typography>Commented by: {comment.email}</Typography>
+                  <Typography variant="h5">{comment.name}</Typography>
+                  <Typography>{comment.body}</Typography>
                 </Box>
               ))}
           </Box>
