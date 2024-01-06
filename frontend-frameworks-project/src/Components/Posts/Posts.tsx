@@ -1,7 +1,7 @@
 import TPost from "../../Model/TPost";
 import JsonApiEndpointsEnum from "../../Model/JsonApiEndpointsEnum";
 import jsonApiFetch from "../../Hooks/jsonApiFetch";
-import Post from "./Post";
+import Post from "./PostListElement";
 import { TUser } from "../../Model/TUser";
 import TComment from "../../Model/TComments";
 import { useEffect, useState } from "react";
