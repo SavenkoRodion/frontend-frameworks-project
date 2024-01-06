@@ -30,6 +30,33 @@ const UserProfile = () => {
       <Typography>City: {userData?.address.city}</Typography>
     </>
   );
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+      id="user-info-wrapper"
+    >
+      {data.length ? (
+        <>
+          <Typography variant="h5">Name: {userData?.name}</Typography>
+          <Typography>Email: {userData?.email}</Typography>
+          <Typography variant="h6">Address</Typography>
+          <Typography>Street: {userData?.address.street}</Typography>
+          <Typography>Suite: {userData?.address.suite}</Typography>
+          <Typography>City: {userData?.address.city}</Typography>
+          <Typography>Zip Code: {userData?.address.zipcode}</Typography>
+          <br />
+          <Typography>Phone: {userData?.phone}</Typography>
+          <Typography>Company name: {userData?.company.name}</Typography>
+        </>
+      ) : (
+        <CircularProgress />
+      )}
+    </Box>
+  );
 };
 
 export default UserProfile;
