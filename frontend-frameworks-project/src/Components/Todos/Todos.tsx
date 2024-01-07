@@ -6,42 +6,40 @@ import TTodos from "../../Model/TTodos";
 import Todo from "./Todo";
 import { Box, CircularProgress } from "@mui/material";
 import { useOutletContext } from "react-router-dom";
+import jsonApiFetchFirst from "../../Hooks/jsonApiFetchFirst";
 
 const Todos = () => {
   const userName: string = useOutletContext();
   const [todos, setTodos] = useState<TTodos[]>([]);
-  const [data, setData] = useState<TUser[]>([]);
-  const [userData, setUserData] = useState<TUser>();
+  const [userData, setUserData] = useState<TUser | null>(null);
 
   useEffect(() => {
-    jsonApiFetch<TUser>(
+    jsonApiFetchFirst<TUser | null>(
       JsonApiEndpointsEnum.USERS,
       `username=${userName}`,
-      setData
+      setUserData
     );
   }, [userName]);
 
   useEffect(() => {
-    setUserData(data[0]);
-  }, [data]);
-
-  useEffect(() => {
-    jsonApiFetch<TTodos>(
-      JsonApiEndpointsEnum.TODOS,
-      `userId=${userData?.id}`,
-      setTodos
-    );
+    if (userData) {
+      jsonApiFetch<TTodos>(
+        JsonApiEndpointsEnum.TODOS,
+        `userId=${userData?.id}`,
+        setTodos
+      );
+    } else {
+      setTodos([]);
+    }
   }, [userData]);
-
-  console.log(todos);
 
   return (
     <Box
       sx={!todos.length ? { display: "flex", justifyContent: "center" } : {}}
     >
       {todos.length ? (
-        todos.map((e, i) => (
-          <Todo key={i} title={e.title} completed={e.completed} />
+        todos.map((todo: TTodos, i: number) => (
+          <Todo key={i} title={todo.title} completed={todo.completed} />
         ))
       ) : (
         <CircularProgress />

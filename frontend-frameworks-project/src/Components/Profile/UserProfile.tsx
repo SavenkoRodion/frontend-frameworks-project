@@ -1,35 +1,23 @@
 import { useOutletContext } from "react-router-dom";
-import jsonApiFetch from "../../Hooks/jsonApiFetch";
 import { TUser } from "../../Model/TUser";
 import JsonApiEndpointsEnum from "../../Model/JsonApiEndpointsEnum";
 import { useEffect, useState } from "react";
-import { Typography } from "@mui/material";
+import { Box, CircularProgress, Typography } from "@mui/material";
+import jsonApiFetchFirst from "../../Hooks/jsonApiFetchFirst";
 
 const UserProfile = () => {
   const userName: string = useOutletContext();
 
-  const [data, setData] = useState<TUser[]>([]);
-  const [userData, setUserData] = useState<TUser>();
+  const [userData, setUserData] = useState<TUser | null>(null);
 
   useEffect(() => {
-    jsonApiFetch<TUser>(
+    jsonApiFetchFirst<TUser | null>(
       JsonApiEndpointsEnum.USERS,
       `username=${userName}`,
-      setData
+      setUserData
     );
   }, [userName]);
 
-  useEffect(() => {
-    setUserData(data[0]);
-  }, [data]);
-
-  return (
-    <>
-      <Typography>Name: {userData?.name}</Typography>
-      <Typography>Email: {userData?.email}</Typography>
-      <Typography>City: {userData?.address.city}</Typography>
-    </>
-  );
   return (
     <Box
       sx={{
@@ -39,18 +27,18 @@ const UserProfile = () => {
       }}
       id="user-info-wrapper"
     >
-      {data.length ? (
+      {userData ? (
         <>
-          <Typography variant="h5">Name: {userData?.name}</Typography>
-          <Typography>Email: {userData?.email}</Typography>
+          <Typography variant="h5">Name: {userData.name}</Typography>
+          <Typography>Email: {userData.email}</Typography>
           <Typography variant="h6">Address</Typography>
-          <Typography>Street: {userData?.address.street}</Typography>
-          <Typography>Suite: {userData?.address.suite}</Typography>
-          <Typography>City: {userData?.address.city}</Typography>
-          <Typography>Zip Code: {userData?.address.zipcode}</Typography>
+          <Typography>Street: {userData.address.street}</Typography>
+          <Typography>Suite: {userData.address.suite}</Typography>
+          <Typography>City: {userData.address.city}</Typography>
+          <Typography>Zip Code: {userData.address.zipcode}</Typography>
           <br />
-          <Typography>Phone: {userData?.phone}</Typography>
-          <Typography>Company name: {userData?.company.name}</Typography>
+          <Typography>Phone: {userData.phone}</Typography>
+          <Typography>Company name: {userData.company.name}</Typography>
         </>
       ) : (
         <CircularProgress />

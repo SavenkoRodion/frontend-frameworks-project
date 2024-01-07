@@ -1,19 +1,14 @@
 import TPost from "../../Model/TPost";
 import { Box, Link, Typography } from "@mui/material";
 
-type PostListElementProps = {
+type PostProps = {
   post: TPost;
   userName: string;
   commentsCount: number;
-  isExpanded?: boolean;
+  children?: JSX.Element;
 };
 
-const PostListElement = ({
-  post,
-  userName,
-  commentsCount,
-  isExpanded = false,
-}: PostListElementProps) => {
+const Post = ({ post, userName, commentsCount, children }: PostProps) => {
   return (
     <Box
       sx={{
@@ -29,13 +24,14 @@ const PostListElement = ({
       <Typography component="h2" variant="h4">
         {post.title}
       </Typography>
-      <Typography>body: {post.body}</Typography>
+      <Typography>{post.body}</Typography>
       <Typography sx={{ marginTop: "10px" }}>
         This post has{" "}
-        <Link href={`/post/${post.id}`}>{commentsCount} comments</Link>
+        <Link href={`/Post/${post.id}`}>{commentsCount} comments</Link>
       </Typography>
+      {children}
     </Box>
   );
 };
 
-export default PostListElement;
+export default Post;
